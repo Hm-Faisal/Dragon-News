@@ -5,7 +5,7 @@ const LatestNews = () => {
   return (
     <>
       <section id="latestNews">
-        <p className="flex gap-2 w-11/12 mx-auto">
+        <div className="flex gap-2 w-11/12 mx-auto">
           <button className="btn btn-error">latest</button>
           <Marquee className="flex gap-4" pauseOnHover="true">
             <Link to="">
@@ -18,7 +18,7 @@ const LatestNews = () => {
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
             </Link>
           </Marquee>
-        </p>
+        </div>
       </section>
     </>
   );
