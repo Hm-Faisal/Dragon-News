@@ -13,8 +13,6 @@ const LeftNavbar = () => {
     })();
   }, []);
 
-  console.log(categories);
-
   return (
     <div>
       <h3 className="font-bold text-xl">
