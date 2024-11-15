@@ -1,9 +1,11 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contextProvider/AuthProvider";
 
 const Login = () => {
-  const { createNewUser, setUser } = useContext(AuthContext);
+  const { createNewUser, setUser, updateUser } = useContext(AuthContext);
+  const [error, setError] = useState({});
+  const navigate = useNavigate();
 
   const handleRegisterForm = (e) => {
     e.preventDefault();
@@ -11,6 +13,11 @@ const Login = () => {
     // Get form Data
     const form = new FormData(e.target);
     const name = form.get("name");
+    if (name.length < 5) {
+      setError({ ...error, name: "Name must be 5 character or long" });
+      return;
+    }
+
     const profile = form.get("profile");
     const email = form.get("email");
     const password = form.get("password");
@@ -19,6 +26,9 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        updateUser(name, profile)
+          .then(() => navigate("/"))
+          .catch((e) => console.log(e));
       })
       .catch((e) => {
         const code = e.code;
@@ -47,6 +57,11 @@ const Login = () => {
                 className="input input-bordered"
                 required
               />
+              {error.name && (
+                <label className="label text-red-600 text-sm">
+                  {error.name}
+                </label>
+              )}
             </div>
             <div className="form-control">
               <label className="label">

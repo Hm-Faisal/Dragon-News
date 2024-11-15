@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
 import Header from "../components/Header";
 import LatestNews from "../components/LatestNews";
 import Navbar from "../components/Navbar";
@@ -6,10 +6,12 @@ import LeftNavbar from "../components/layout-components/LeftNavbar";
 import RightNavbar from "../components/layout-components/RightNavbar";
 
 const HomeLayout = () => {
+  const latestNews = useLoaderData();
+
   return (
     <div className="font-Poppins">
       <Header />
-      <LatestNews />
+      <LatestNews news={latestNews} />
       <Navbar />
       <main className="grid grid-cols-12 w-11/12 mx-auto mt-3 gap-8">
         <aside className="col-span-3">

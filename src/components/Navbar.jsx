@@ -1,5 +1,4 @@
 import { Link, NavLink } from "react-router-dom";
-import userIcon from "../assets/images/user.png";
 import { useContext } from "react";
 import { AuthContext } from "../contextProvider/AuthProvider";
 
@@ -17,9 +16,12 @@ const Navbar = () => {
           </nav>
         </div>
         <div className="end-nav flex justify-center gap-2">
-          {user && user.email ? (
+          {user ? (
             <>
-              <img src={userIcon} alt="user-icon" />
+              <div>
+                <img src={user.photoURL} className="w-10 rounded-full" />
+                <span>{user.displayName}</span>
+              </div>
               <button onClick={logoutUser} className="btn btn-neutral">
                 Logout
               </button>

@@ -4,11 +4,15 @@ import MainContent from "../components/categoryNews/MainContent";
 import AuthLayout from "../layout/AuthLayout";
 import Login from "../components/authform/Login";
 import Register from "../components/authform/Register";
+import News from "../layout/News";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayout />,
+    loader: () =>
+      fetch("https://openapi.programming-hero.com/api/news/category/01"),
     children: [
       {
         path: "",
@@ -23,6 +27,16 @@ const router = createBrowserRouter([
           ),
       },
     ],
+  },
+  {
+    path: "/news/:id",
+    element: (
+      <PrivateRouter>
+        <News />
+      </PrivateRouter>
+    ),
+    loader: ({ params }) =>
+      fetch(`https://openapi.programming-hero.com/api/news/${params.id}`),
   },
   {
     path: "auth",

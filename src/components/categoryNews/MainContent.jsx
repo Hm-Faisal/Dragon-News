@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import News from "./News";
+import NewsCard from "./NewsCard";
 
 const MainContent = () => {
   const { data: categoryNews } = useLoaderData();
@@ -12,7 +12,7 @@ const MainContent = () => {
       </p>
       <div className="flex flex-col gap-4">
         {categoryNews.map((news) => (
-          <News key={news._id} news={news} />
+          <NewsCard key={news._id} news={news} />
         ))}
       </div>
     </div>
